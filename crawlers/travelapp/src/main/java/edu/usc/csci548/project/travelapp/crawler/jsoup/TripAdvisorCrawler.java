@@ -9,8 +9,12 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+
 public class TripAdvisorCrawler {
 
+	public static HashMap<String,String> fileURLDict = new HashMap<>();
+	
 	public static void crawlCities() {
 
 		String base = "http://www.tripadvisor.com";
@@ -18,29 +22,31 @@ public class TripAdvisorCrawler {
 
 		segments.put("NewYork",
 				"/Attractions-g60763-Activties-New_York_City_New_York.html");
-		segments.put("Chicago",
+		
+		/*segments.put("Chicago",
 				"/Attractions-g35805-Activities-Chicago_Illinois.html");
 		segments.put("London",
 				"/Attractions-g186338-Activities-London_England.html");
 
 		segments.put("LosAngeles",
-				"/Attractions-g32655-Activities-Los_Angeles_California.html");
+				"/Attractions-g32655-Activities-Los_Angeles_California.html");*/
 		CrawlSeedUrl retrieveSeedUrl = new CrawlSeedUrl(base);
 		for (String city : segments.keySet()) {
 			Map<String, String> res = retrieveSeedUrl.crawlThingsToDo(segments
 					.get(city));
 			for (String string : res.keySet()) {
 				retrieveSeedUrl.saveSummary(
-						"/home/vijay/csci548/" + city + "/",
+						"/home/lk/csci548/" + city + "/",
 						string.replace("/", "_").replace(" ", ""),
 						res.get(string));
+				fileURLDict.put(string.replace("/", "_").replace(" ", "")+".html", res.get(string));
 			}
 		}
 
 	}
 
-	public static void main(String[] args) {
-		// crawlCities();
+	public static void main(String[] args) throws FailingHttpStatusCodeException, InterruptedException {
+		crawlCities();
 		String rootFlder = "/home/lk/csci548";
 		List<String> cities = new ArrayList<String>();
 		cities.add("NewYork");
@@ -62,7 +68,7 @@ public class TripAdvisorCrawler {
 	}
 
 	public static List<JSONObject> processCrawledWebPages(String name,
-			String location) {
+			String location) throws FailingHttpStatusCodeException, InterruptedException {
 		File dataSource = new File(location);
 		List<JSONObject> jsonPlaces = new ArrayList<JSONObject>();
 		CrawlSeedUrl wrapper = new CrawlSeedUrl();

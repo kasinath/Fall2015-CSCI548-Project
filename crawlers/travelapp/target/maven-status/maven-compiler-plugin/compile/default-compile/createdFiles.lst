@@ -1,4 +1,4 @@
 edu/usc/csci548/project/travelapp/crawler/jsoup/CrawlSeedUrl.class
 edu/usc/csci548/project/travelapp/crawler/jsoup/CreateJsonRead.class
-edu/usc/csci548/project/travelapp/App.class
 edu/usc/csci548/project/travelapp/crawler/jsoup/TripAdvisorCrawler.class
+edu/usc/csci548/project/travelapp/crawler/htmlunit/JavascriptScraper.class
