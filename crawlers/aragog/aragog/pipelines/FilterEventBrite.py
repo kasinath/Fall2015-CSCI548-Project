@@ -14,8 +14,8 @@ class FilterEventBrite(object):
 
 	def process_item(self, item, spider):
 		if self.isValidPage(item) :
-			#print "[ACCEPTED] Item ACCEPTED!!!"
+			print "[ACCEPTED] Item ACCEPTED!!!"
 			return item
 		else :
-			#print "[DROP]",item["url"]
+			print "[DROP]",item["url"]
 			raise DropItem("[DROP] Page did not meet Event Brite - Dropping")

@@ -48,6 +48,6 @@ class aragogSpider(Spider):
 		for link in links:
 			#print "[DEBUG] ", response.url , "\t",link.url , "\n"
 			#print "[DEBUG LINK] ",link.url , "\n"
-					yield scrapy.Request(link.url, self.parse)
+			yield scrapy.Request(link.url, self.parse)
 
 
