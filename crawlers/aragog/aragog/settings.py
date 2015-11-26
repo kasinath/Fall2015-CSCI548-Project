@@ -70,15 +70,15 @@ ITEM_PIPELINES = {
 	
 }
 LOG_LEVEL="ERROR"
-DEPTH_LIMIT=10
-DEPTH_PRIORITY = 10 
+DEPTH_LIMIT=3
+DEPTH_PRIORITY = 3 
 SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 # NOTE: AutoThrottle will honour the standard settings for concurrency and delay
-AUTOTHROTTLE_ENABLED=True
+AUTOTHROTTLE_ENABLED=False
 # The initial download delay
 AUTOTHROTTLE_START_DELAY=1
 # The maximum download delay to be set in case of high latencies

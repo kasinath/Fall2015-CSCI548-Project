@@ -3,7 +3,7 @@ from ..spiders.aragog import Properties
 from scrapy.exceptions import DropItem
 from scrapy.selector import Selector
 import os
-import json
+import json,re
 
 class PersistItemsPipeline(object):
 	docCount = 0
@@ -19,8 +19,7 @@ class PersistItemsPipeline(object):
 		prop = Properties()
 		if item["url"].split('?')[0] in PersistItemsPipeline.uniq :
 			raise DropItem("[DROP] Page already Persisted. Dropping : " + item["url"])
-		PersistItemsPipeline.uniq.append(item["url"].split('?')[0])	
-		PersistItemsPipeline.docCount = PersistItemsPipeline.docCount+1
+		
 		if PersistItemsPipeline.docCount > prop.pagesToCrawl : 
 			self.crawler.engine.close_spider(spider, 'Target Reached, Shutting down ARAGOG')
 		if not os.path.exists(prop.opDir):
@@ -33,7 +32,7 @@ class PersistItemsPipeline(object):
 			desc = []
 			sttime = []
 			endtime = []
-			fileName = prop.opDir+ "/" + str(PersistItemsPipeline.docCount) + '.JSON'
+			
 			htmlTxt =item["body"]
 			#TITLE
 			name = Selector(text=htmlTxt).xpath('//div[@id="event_header"]//span[@itemprop="name"]/text()').extract()
@@ -44,6 +43,9 @@ class PersistItemsPipeline(object):
 			#ADDRESS
 			addr = Selector(text=htmlTxt).xpath('//span[@itemprop="location"]//meta[@itemprop="name"]/@content').extract()
 			jsonObj["addr"] = addr[0]
+
+			if jsonObj["location"].lower().find("london") < 0 and jsonObj["addr"].lower().find("london") < 0:
+				raise DropItem("[DROP] Incorrect Page : " + item["url"])
 			#DESCRIPTION
 			desc = Selector(text=htmlTxt).xpath('//div[@class="panel_section"]/span[@itemprop="description"][@class="description"]//p/text()').extract()
 			if len(desc)==0:
@@ -65,7 +67,16 @@ class PersistItemsPipeline(object):
 
 			#URL
 			jsonObj["url"] = item["url"]
-			#print(json.dumps(jsonObj,indent=4))
+		
+			#CATEGORIES
+			m=re.search(r'"categories"\:\[(.*)\]',htmlTxt)
+			if len(m.group())!=0:
+				jsonObj["categories"] = eval(m.group()[13:])
+			else:
+				jsonObj["categories"] = []
+			PersistItemsPipeline.uniq.append(item["url"].split('?')[0])	
+			PersistItemsPipeline.docCount = PersistItemsPipeline.docCount+1
+			fileName = prop.opDir+ "/" + str(PersistItemsPipeline.docCount) + '.JSON'
 			with open(fileName,'w+') as f:
 				f.write(json.dumps(jsonObj,indent=4))
 				f.close()

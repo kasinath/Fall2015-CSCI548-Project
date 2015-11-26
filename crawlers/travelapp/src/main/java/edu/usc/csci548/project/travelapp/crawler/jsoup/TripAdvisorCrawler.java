@@ -19,17 +19,17 @@ public class TripAdvisorCrawler {
 
 		String base = "http://www.tripadvisor.com";
 		Map<String, String> segments = new HashMap<String, String>();
-
-		segments.put("NewYork",
+		segments.put("LosAngeles",
+				"/Attractions-g32655-Activities-Los_Angeles_California.html");
+		/*segments.put("NewYork",
 				"/Attractions-g60763-Activties-New_York_City_New_York.html");
 		
-		/*segments.put("Chicago",
+		segments.put("Chicago",
 				"/Attractions-g35805-Activities-Chicago_Illinois.html");
 		segments.put("London",
 				"/Attractions-g186338-Activities-London_England.html");
 
-		segments.put("LosAngeles",
-				"/Attractions-g32655-Activities-Los_Angeles_California.html");*/
+*/
 		CrawlSeedUrl retrieveSeedUrl = new CrawlSeedUrl(base);
 		for (String city : segments.keySet()) {
 			Map<String, String> res = retrieveSeedUrl.crawlThingsToDo(segments

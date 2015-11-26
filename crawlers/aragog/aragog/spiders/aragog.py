@@ -47,7 +47,7 @@ class aragogSpider(Spider):
 		links = sorted(links,key = lambda x : self.strSim(x.url,response.url) ,reverse=True)
 		for link in links:
 			#print "[DEBUG] ", response.url , "\t",link.url , "\n"
-			#print "[DEBUG LINK] ",link.url , "\n"
+			#print "[DEBUG LINK] ",link.url
 			yield scrapy.Request(link.url, self.parse)
 
 
