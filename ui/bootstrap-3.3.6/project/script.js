@@ -72,7 +72,13 @@ var cities = ["Los Angeles", "New York" , "London"];
 
 			}					
 	}	
+msg += "\n Generating results";
 
-	alert(msg);	
+var r = confirm(msg);
+if (r == true) {
+    window.location="results.html"
+} else {
+    txt = "You pressed Cancel!";
+}
 
 }
