@@ -1,26 +1,45 @@
+//=====================================================================================
 $(document).ready(function() {
     $('#datePicker1')
         .datepicker({
             format: 'mm/dd/yyyy'
-        })
+        });
         
 
  $('#datePicker2')
         .datepicker({
             format: 'mm/dd/yyyy'
-        })
+        });
         
+}); //End Document Ready
 
+//=====================================================================================
 
-
+$(function () {
+    var options = {
+    };
+    $('.grid-stack').gridstack(options);
 });
 
+//=====================================================================================
+var map;
 
-var options = {
-    cell_height: 80,
-    vertical_margin: 10
-};
-$('.grid-stack').gridstack(options);
+function initMap() {
+  var myLatLng = {lat: 34.052235, lng:  -118.243683};
+
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: myLatLng
+  });
+
+  var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: 'Hello World!'
+  });
+}
+
+//=====================================================================================
 
 
 function cityClick(id)
