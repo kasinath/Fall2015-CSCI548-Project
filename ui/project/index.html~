@@ -72,144 +72,62 @@
         <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
       </div>
 
-	<!--DAY 1-->
-	<div class="row">
-		<div class = "col-md-1"> 01/01/2016 </div>
-		<div class = "col-md-11">  
-		<div class="row">
-			<div class="col-md-3">
-				 <div class="panel panel-danger">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Museum of Art</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-3">
-				 <div class="panel panel-success">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Empire State Bldg</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-3">
-				 <div class="panel panel-danger">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Solano Beach</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-3">
-				 <div class="panel panel-info">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Shakespeare in the Park</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-		</div>	
+	<br/><br/><br/>
+      <div class ="row">
+      <div class="col-md-2"><label class="control-label">Pick a City</label>
+      </div>
+	<div class="col-md-8">
+	 <button type="button" class="btn btn-default" onclick="cityClick('0')" id="city-btn-0">Los Angeles</button>
+        <button type="button" class="btn  btn-default" onclick="cityClick('1')" id="city-btn-1">New York</button>
+	<button type="button" class="btn  btn-default" onclick="cityClick('2')" id="city-btn-2">London</button>
+      </div>
+            
 	</div>
-	</div><!--END OF DAY 1 -->
-
- 
-	<!--DAY 2-->
-	<div class="row">
-		<div class = "col-md-1"> 01/02/2016 </div>
-		<div class = "col-md-11">  
-		<div class="row">
-			<div class="col-md-6">
-				 <div class="panel panel-success">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Staten Island Ferry</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-3">
-				 <div class="panel panel-default">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Wall Street</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-3">
-				 <div class="panel panel-danger">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Central Park</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-	</div>	
+	<br/><br/>
+ <div class ="row">
+      <div class="col-md-2"><label class="control-label">What do you like?</label>
+      </div>
+	<div class="col-md-8">
+	 <button type="button" class="btn btn-default" onclick="IntClick('0')" id="interest-btn-0">Literature</button>
+        <button type="button" class="btn  btn-default" onclick="IntClick('1')" id="interest-btn-1">Movies</button>
+	<button type="button" class="btn  btn-default" onclick="IntClick('2')" id="interest-btn-2">Art</button>
+	<button type="button" class="btn btn-default" onclick="IntClick('3')" id="interest-btn-3">Theatre</button>
+        <button type="button" class="btn  btn-default" onclick="IntClick('4')" id="interest-btn-4">Music</button>
+	<button type="button" class="btn  btn-default" onclick="IntClick('5')" id="interest-btn-5">Cooking</button>
+      </div>
+            
 	</div>
-	</div><!--END OF DAY 2 -->
+
+<br/><br/>
+       <div class ="row">
+      <div class="col-md-2 "><label class="control-label">When?</label>
+      </div>
+	<div class="col-md-8">
+
+        <div class="col-xs-3 date">
+            <div class="input-group input-append date" id="datePicker1">
+                <input type="text" class="form-control" name="date" />
+                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+        </div>
+<div class="col-xs-3 date">
+            <div class="input-group input-append date" id="datePicker2">
+                <input type="text" class="form-control" name="date" />
+                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+        </div>
+      </div>
+            
+	</div>
+	<br/><br>
+	<div class="row">
+	<div class="col-md-10"></div>
+	<div class="col-md-2" ><button type="button" class="btn btn-success" onclick="go()">Let's Go!</button> </div>
+	<div class="col-md-5" ></div>
 	
-	<!--DAY 3-->
-	<div class="row">
-		<div class = "col-md-1"> 01/03/2016 </div>
-		<div class = "col-md-11">  
-		<div class="row">
-			<div class="col-md-4">
-				 <div class="panel panel-warning">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Times Square</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-2">
-				 <div class="panel panel-warning">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">One WTC</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-
-			<div class="col-md-6">
-				 <div class="panel panel-primary">
-			          	<div class="panel-heading">
-				              <h3 class="panel-title">Taylor Swift Concert</h3>
-        				</div>
-       				       <div class="panel-body">
-              					Panel content
-            				</div>
-          			 </div>
-			</div>
-	</div>	
 	</div>
-	</div><!--END OF DAY 3 -->
-	</div>
-
-
               
     </div> <!-- /container -->
 
