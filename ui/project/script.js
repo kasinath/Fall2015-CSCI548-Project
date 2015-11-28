@@ -21,14 +21,13 @@ $(function () {
     $('.grid-stack').gridstack(options);
 });
 
-//=====================================================================================
 
-$(function(){
-$('.clickable').on('click',function(){
-    var effect = $(this).data('effect');
-        $(this).closest('.panel')[effect]();
-	})
-})
+$(document).on("click",".closepanel", function (e) {
+  e.preventdefault;
+$(this).closest(".grid-stack-item").fadeOut(300);
+});
+
+
 
 //=====================================================================================
 var map;

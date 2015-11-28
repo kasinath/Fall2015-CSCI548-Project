@@ -21,6 +21,14 @@ $(function () {
     $('.grid-stack').gridstack(options);
 });
 
+
+$(document).on("click",".closepanel", function (e) {
+  e.preventdefault;
+$(this).closest(".fd-box2").fadeOut(300);
+});
+
+
+
 //=====================================================================================
 var map;
 
