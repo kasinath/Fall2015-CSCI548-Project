@@ -1,0 +1,14 @@
+{
+    "addr": "New York, NY", 
+    "title": "hello test event", 
+    "url": "https://www.eventbrite.com/e/hello-test-event-tickets-19365078471?aff=ebrowse", 
+    "location": "", 
+    "starttime": "2015-12-12T19:00:00-05:00", 
+    "endtime": "2015-12-24T22:00:00-05:00", 
+    "categories": [
+        "New York, NY Events", 
+        "Convention", 
+        "Government"
+    ], 
+    "desc": "test for my future event"
+}
