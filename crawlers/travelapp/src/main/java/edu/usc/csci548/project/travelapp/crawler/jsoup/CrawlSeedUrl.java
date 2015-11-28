@@ -4,7 +4,6 @@ package edu.usc.csci548.project.travelapp.crawler.jsoup;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,8 +15,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 import edu.usc.csci548.project.travelapp.crawler.htmlunit.JavascriptScraper;
 
@@ -117,6 +114,47 @@ public class CrawlSeedUrl {
 		try {
 			Map<String, String> data = new HashMap<String, String>();
 			Document doc = retrieveDocumentLocal(url);
+			String heading = doc.select("h1[id=HEADING]").text();
+			data.put("name", heading);
+			JSONObject nameObj = new CreateJsonRead()
+			.createJsonObect(data);
+			arrayElementOneArray.add(nameObj);
+			data.clear();
+			String rating = "0";
+			rating = doc.select("img[property=ratingValue]").attr("content");
+			data.put("rating", rating);
+			JSONObject rate = new CreateJsonRead()
+			.createJsonObect(data);
+			arrayElementOneArray.add(rate);
+			data.clear();
+			Elements select1 = doc.select("div[id=HOUR_OVERLAY_CONTENTS]");
+			if(select1.size() > 0){
+			Elements days = select1.get(0).select("div");
+			if(days.size() > 0){
+			List<JSONObject> time = new ArrayList<JSONObject>();
+			days.remove();
+			for (Element element : days) {
+				Elements day = element.select("span");
+				if (day.size() < 1) {
+					continue;
+				}
+
+				data.put("days", day.select("span[class=days]").text());
+				data.put("time", day.select("span[class=hours]").text());
+				JSONObject dayshours = new CreateJsonRead()
+						.createJsonObect(data);
+				time.add(dayshours);
+			}
+			JSONArray arr = new JSONArray();
+			arr.addAll(time);
+			JSONObject dayshours = new JSONObject();
+			if (arr.size() > 0){
+				dayshours.put("operation", arr);
+			arrayElementOneArray.add(dayshours);
+			}
+			}
+			}
+			data.clear();
 			Elements select = doc.select("address");
 			for (Element element : select) {
 				Elements address = element.select("span.format_address"); // Address
@@ -187,7 +225,7 @@ public class CrawlSeedUrl {
 			revObj.put("reviews", rvsArray);
 			arrayElementOneArray.add(revObj);
 			
-			Elements nearByAttractions = doc.select("div.attractions *");
+			Elements nearByAttractions = doc.select("span.class *");
 			JSONArray nearBy = new JSONArray();
 			for (Element element2 : nearByAttractions) {
 				data.clear();
@@ -205,7 +243,7 @@ public class CrawlSeedUrl {
 			e.printStackTrace();
 		}
 		if (arrayElementOneArray.size() > 0)
-			result.put(name, arrayElementOneArray);
+			result.put("place", arrayElementOneArray);
 		return result;
 	}
 
