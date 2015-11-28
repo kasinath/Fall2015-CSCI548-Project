@@ -347,8 +347,8 @@
 
 		<div class="col-md-4">
 			
-			<div id="map" height="50px"></div><!--end of map-->
-			<div style="background-color: red ; height  :650px">hello</div>
+			<div id="map" style=" height  :650px"></div><!--end of map-->
+			<!--<div style="background-color: red ; height  :650px">hello</div>-->
 		</div>
 
 	</div>
