@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<title>permadi.com | Facebook Graph API OAUTH And Popup Authentication Example</title>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>
+var DEBUG=true;
+window.fbAsyncInit = function()
+{
+    FB.Event.subscribe('auth.statusChange', onFacebookStatusChange);
+    FB.init({
+      appId  : '720076201427475',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+
+	FB.getLoginStatus(onFacebookInitialLoginStatus);
+
+};
+
+(function() {
+var e = document.createElement('script');
+e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+e.async = true;
+document.getElementById('fb-root').appendChild(e);
+}());
+
+function facebookLogin()
+{
+    FB.login(onFacebookLoginStatus, {scope:'read_stream,publish_stream'});
+}
+
+/*
+* Callback function for FB.getLoginStatus
+*/
+function onFacebookInitialLoginStatus(response)
+{
+    if (DEBUG)
+	{
+		alert("onFacebookLoginStatus(), "
+		  + "\nresponse.status="+response.status
+		  +" \nresponse.session="+response.session
+		  +" \nresponse.perms="+response.perms);
+	}
+    if (response.status=="connected" && response.authResponse)
+    {
+		// At this stage, user is logged in.
+		// For this example, I am logging out the user if the user is already logged in.
+		FB.logout();
+    }
+    else
+    {
+		// User if not logged in.
+    }
+}
+
+/*
+* Callback function for 'auth.statusChange' event.
+*/
+function onFacebookStatusChange(response)
+{
+    if (DEBUG)
+	{
+		alert("onFacebookStatusChange(), "
+		  + "\nresponse.status="+response.status
+		  +" \nresponse.session="+response.session
+		  +" \nresponse.perms="+response.perms);
+	}
+}
+
+/*
+* Callback function for FB.login
+*/
+function onFacebookLoginStatus(response)
+{
+    if (DEBUG)
+	{
+		alert("onFacebookLoginStatus(), "
+		  + "\nresponse.status="+response.status
+		  +" \nresponse.session="+response.session
+		  +" \nresponse.perms="+response.perms);
+	}
+    if (response.status=="connected" && response.authResponse)
+    {
+		alert("You are all set.");
+		var loginButtonDiv=document.getElementById("fb-login-button-div");
+		loginButtonDiv.style.display="none";
+		var contentDiv=document.getElementById("user-is-authenticated");
+		contentDiv.innerHTML="User has been authenticated.  The application is ready to use.";
+    }
+    else
+    {
+		alert("Please login to enjoy this application.");
+    }
+}
+
+function loginUsingPopup()
+{
+	var paramsLocation=window.location.toString().indexOf('?');
+	var params=""; 
+	if (paramsLocation>=0)
+		params=window.location.toString().slice(paramsLocation);
+		
+	window.open("https://www.facebook.com/dialog/oauth?client_id=155206827868292&scope=publish_stream&redirect_uri='/home/lk/Desktop/github/Fall2015-CSCI548-Project/ui/project/index.html'",
+		"loginWindow", "height=400, width=800");
+	
+	facebookLogin();
+}
+ 
+function loginUsingOAUTH()
+{
+	var paramsLocation=window.location.toString().indexOf('?');
+	var params=""; 
+	if (paramsLocation>=0)
+		params=window.location.toString().slice(paramsLocation);
+
+	top.location = 'https://graph.facebook.com/oauth/authorize?client_id=155206827868292&scope=publish_stream&redirect_uri=http://www.permadi.com/tutorial/facebook-oauth-and-dialog-example/'+params;
+}
+
+</script>
+
+Please login to enjoy all the features of this application:<p>
+<input onclick="loginUsingPopup();" type="button" value="Login Using Popup">
+
+<br>
+
+
+
+</div>
+</html>
